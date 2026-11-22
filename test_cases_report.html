@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Platform - Test Cases Specification & Verification Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 1.0cm 1.2cm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.45;
+      font-size: 8.5pt;
+      background: #ffffff;
+    }
+
+    .header-banner {
+      border-bottom: 2px solid #4f46e5;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .title {
+      font-size: 17pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+    }
+
+    .subtitle {
+      font-size: 9.5pt;
+      color: #4f46e5;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .meta-box {
+      text-align: right;
+      font-size: 7.8pt;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .meta-box strong {
+      color: #0f172a;
+    }
+
+    /* KPI Summary Cards */
+    .kpi-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .kpi-val {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #4f46e5;
+    }
+
+    .kpi-val.success {
+      color: #10b981;
+    }
+
+    .kpi-lbl {
+      font-size: 6.8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
+
+    /* Section Headings */
+    h2 {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-left: 3.5px solid #4f46e5;
+      padding-left: 7px;
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-bottom: 6px;
+      font-size: 8.2pt;
+      color: #334155;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 7.6pt;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 6.8pt;
+      letter-spacing: 0.4px;
+      padding: 5px 6px;
+      border: 1px solid #cbd5e1;
+      text-align: left;
+    }
+
+    td {
+      padding: 4.5px 6px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      line-height: 1.3;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 1.5px 5px;
+      border-radius: 3px;
+      font-size: 6.3pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .badge-wb {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border: 1px solid #d8b4fe;
+    }
+
+    .badge-bb {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-pass {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+
+    .badge-admin {
+      background: #fdf2f8;
+      color: #be185d;
+      border: 1px solid #fbcfe8;
+    }
+
+    .badge-student {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .badge-public {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .code-span {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 7.2pt;
+      background: #f1f5f9;
+      padding: 1px 3px;
+      border-radius: 2px;
+      color: #0f172a;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    .footer {
+      margin-top: 14px;
+      padding-top: 6px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 7pt;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <!-- HEADER -->
+  <div class="header-banner">
+    <div>
+      <div class="title">QuizVerse Platform</div>
+      <div class="subtitle">Complete Test Specification & Verification Matrix (34 Test Cases)</div>
+    </div>
+    <div class="meta-box">
+      <div><strong>Architecture:</strong> MERN Stack (Node, Express, Mongo, React)</div>
+      <div><strong>Test Harness:</strong> Jest & Supertest In-Memory MongoDB</div>
+      <div><strong>Total Cases:</strong> 34 (17 Whitebox + 17 Blackbox)</div>
+      <div><strong>Pass Rate:</strong> 100% (34 Passed / 0 Failed)</div>
+    </div>
+  </div>
+
+  <!-- KPI SUMMARY -->
+  <div class="kpi-container">
+    <div class="kpi-card">
+      <div class="kpi-val">34</div>
+      <div class="kpi-lbl">Total Test Cases</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">17</div>
+      <div class="kpi-lbl">Whitebox Tests</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">17</div>
+      <div class="kpi-lbl">Blackbox Tests</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val success">100% PASS</div>
+      <div class="kpi-lbl">Verification Status</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: METHODOLOGY -->
+  <div class="avoid-break">
+    <h2>1. Testing Methodology Overview</h2>
+    <p>
+      The test suite is partitioned into two complementary testing paradigms ensuring both logical accuracy and interface integrity:
+    </p>
+    <ul style="margin-left: 18px; font-size: 8pt; color: #334155; margin-bottom: 10px;">
+      <li><strong>Whitebox Testing (17 Cases):</strong> Focuses on internal code structures, scoring engine calculations, boundary conditions, input validator schemas, and isolated RBAC middleware units.</li>
+      <li><strong>Blackbox Testing (17 Cases):</strong> Focuses on end-to-end REST API endpoint behaviors, HTTP status codes, authorization header verification, student answer-leak protection, and submission workflows.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 2: WHITEBOX TESTS PART 1 -->
+  <h2>2. Whitebox Testing Specification (17 Test Cases)</h2>
+
+  <!-- Suite A: Score Calculator -->
+  <div class="avoid-break">
+    <h3>Suite A: Score Calculator Engine (<span class="code-span">backend/src/utils/scoreCalculator.js</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 25%;">Test Scenario</th>
+          <th style="width: 32%;">Input Conditions / Data</th>
+          <th style="width: 27%;">Expected Behavior</th>
+          <th style="width: 8%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WB-01</strong></td>
+          <td>100% correct score calculation</td>
+          <td>3 questions (points: 2, 3, 5). Student submits correct answers for all 3.</td>
+          <td><span class="code-span">totalScore: 10</span>, <span class="code-span">maxScore: 10</span>, <span class="code-span">percentage: 100%</span>, <span class="code-span">passed: true</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-02</strong></td>
+          <td>0% score calculation</td>
+          <td>3 questions. Student submits incorrect answers for all 3.</td>
+          <td><span class="code-span">totalScore: 0</span>, <span class="code-span">maxScore: 10</span>, <span class="code-span">percentage: 0%</span>, <span class="code-span">passed: false</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-03</strong></td>
+          <td>Partial score with weighted points</td>
+          <td>3 questions (2, 3, 5 pts). Student gets Q1 (2 pts) & Q3 (5 pts) correct; Q2 wrong.</td>
+          <td><span class="code-span">totalScore: 7</span>, <span class="code-span">maxScore: 10</span>, <span class="code-span">percentage: 70%</span>, <span class="code-span">passed: true</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-04</strong></td>
+          <td>Skipped / unattempted questions</td>
+          <td>3 questions. Student answers only Q1; leaves Q2 and Q3 unanswered.</td>
+          <td>Calculates attempted Q1 (2 pts); leaves remaining answers null without throwing errors.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-05</strong></td>
+          <td>Empty or null questions array</td>
+          <td>Passes <span class="code-span">[]</span> or <span class="code-span">null</span> to <span class="code-span">calculateQuizScore()</span>.</td>
+          <td>Safely returns zero-state object: <span class="code-span">{ totalScore: 0, maxScore: 0, passed: false }</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-06</strong></td>
+          <td>Dynamic pass threshold boundary</td>
+          <td>Student score = 50%. Tested against thresholds 50% vs 75%.</td>
+          <td>Threshold 50% evaluates <span class="code-span">passed: true</span>; Threshold 75% evaluates <span class="code-span">passed: false</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Suite B: Payload Validator -->
+  <div class="avoid-break">
+    <h3>Suite B: Payload Schema Validator (<span class="code-span">backend/src/utils/validator.js</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 25%;">Test Scenario</th>
+          <th style="width: 32%;">Input Conditions / Data</th>
+          <th style="width: 27%;">Expected Behavior</th>
+          <th style="width: 8%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WB-07</strong></td>
+          <td>Valid registration payload</td>
+          <td><span class="code-span">{ name: 'Alice', email: 'alice@test.com', password: 'secure123', role: 'student' }</span></td>
+          <td><span class="code-span">isValid: true</span>, errors list is empty.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-08</strong></td>
+          <td>Rejection of invalid registration</td>
+          <td>Malformed email (<span class="code-span">'not-an-email'</span>), password &lt; 6 chars, invalid role.</td>
+          <td><span class="code-span">isValid: false</span>, returns specific validation messages for each field.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-09</strong></td>
+          <td>Valid quiz input payload</td>
+          <td>Title, time limit, passing threshold, and question array with choices.</td>
+          <td><span class="code-span">isValid: true</span>, errors list is empty.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-10</strong></td>
+          <td>Enforce minimum 2 options</td>
+          <td>Question with only 1 choice provided.</td>
+          <td><span class="code-span">isValid: false</span>, error specifies "at least 2 options".</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-11</strong></td>
+          <td>Correct option index bounds</td>
+          <td>Question has 3 options; <span class="code-span">correctOptionIndex: 5</span> (out of bounds).</td>
+          <td><span class="code-span">isValid: false</span>, error flags invalid correct option index.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>QuizVerse Role-Based Platform • Test Specification</span>
+    <span>Page 1 of 3</span>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page-break"></div>
+
+  <!-- Suite C: JWT Helper -->
+  <div class="avoid-break" style="margin-top: 4px;">
+    <h3>Suite C: JWT Token Helper (<span class="code-span">backend/src/utils/tokenHelper.js</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 25%;">Test Scenario</th>
+          <th style="width: 32%;">Input Conditions / Data</th>
+          <th style="width: 27%;">Expected Behavior</th>
+          <th style="width: 8%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WB-12</strong></td>
+          <td>Signed token generation</td>
+          <td>Payload: <span class="code-span">{ id: 'u1', role: 'admin', email: 'admin@quiz.com' }</span>.</td>
+          <td>Returns 3-segment JWT string (<span class="code-span">header.payload.signature</span>).</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-13</strong></td>
+          <td>Token verification & decoding</td>
+          <td>Signed JWT token passed into <span class="code-span">verifyToken()</span>.</td>
+          <td>Decoded payload preserves ID, role, and email correctly.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-14</strong></td>
+          <td>Tampered token rejection</td>
+          <td>Corrupted token string or <span class="code-span">null</span> token passed.</td>
+          <td>Throws JsonWebToken exception preventing unauthorized access.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Suite D: RBAC Middleware Unit -->
+  <div class="avoid-break">
+    <h3>Suite D: RBAC Middleware Unit (<span class="code-span">backend/src/middleware/auth.js</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 25%;">Test Scenario</th>
+          <th style="width: 32%;">Input Conditions / Data</th>
+          <th style="width: 27%;">Expected Behavior</th>
+          <th style="width: 8%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WB-15</strong></td>
+          <td>Authorized role passthrough</td>
+          <td><span class="code-span">req.user.role = 'admin'</span>, middleware rule <span class="code-span">authorize('admin')</span>.</td>
+          <td>Calls <span class="code-span">next()</span>; request proceeds to controller.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-16</strong></td>
+          <td>Unauthorized role block</td>
+          <td><span class="code-span">req.user.role = 'student'</span>, middleware rule <span class="code-span">authorize('admin')</span>.</td>
+          <td>Halts pipeline; responds with <span class="code-span">403 Forbidden</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><strong>WB-17</strong></td>
+          <td>Missing user session block</td>
+          <td><span class="code-span">req.user = null</span> (unauthenticated).</td>
+          <td>Halts pipeline; responds with <span class="code-span">401 Unauthorized</span>.</td>
+          <td><span class="badge badge-pass">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3: BLACKBOX TESTS PART 1 -->
+  <h2>3. Blackbox Testing Specification (17 Test Cases)</h2>
+
+  <!-- Suite E: Auth Endpoints -->
+  <div class="avoid-break">
+    <h3>Suite E: Authentication API Endpoints (<span class="code-span">/api/auth</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 14%;">Endpoint</th>
+          <th style="width: 9%;">Role</th>
+          <th style="width: 25%;">Scenario Description</th>
+          <th style="width: 34%;">Expected Status & Response Contract</th>
+          <th style="width: 10%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BB-01</strong></td>
+          <td><span class="code-span">POST /register</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Register student with valid data</td>
+          <td><strong>201 Created</strong>: Returns token & user object with <span class="code-span">role: 'student'</span>.</td>
+          <td><span class="badge badge-pass">PASS (201)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-02</strong></td>
+          <td><span class="code-span">POST /register</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Register admin with valid role</td>
+          <td><strong>201 Created</strong>: Returns token & user object with <span class="code-span">role: 'admin'</span>.</td>
+          <td><span class="badge badge-pass">PASS (201)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-03</strong></td>
+          <td><span class="code-span">POST /register</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Attempt duplicate email registration</td>
+          <td><strong>400 Bad Request</strong>: Returns error message stating account already exists.</td>
+          <td><span class="badge badge-pass">PASS (400)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-04</strong></td>
+          <td><span class="code-span">POST /register</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Missing required fields (name, password)</td>
+          <td><strong>400 Bad Request</strong>: Returns array of validation error messages.</td>
+          <td><span class="badge badge-pass">PASS (400)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-05</strong></td>
+          <td><span class="code-span">POST /login</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Login with valid credentials</td>
+          <td><strong>200 OK</strong>: Returns JWT Bearer token and user profile object.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-06</strong></td>
+          <td><span class="code-span">POST /login</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Login with incorrect password</td>
+          <td><strong>401 Unauthorized</strong>: Rejects with "Invalid email or password".</td>
+          <td><span class="badge badge-pass">PASS (401)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-07</strong></td>
+          <td><span class="code-span">POST /login</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Login with unregistered email</td>
+          <td><strong>401 Unauthorized</strong>: Rejects with "Invalid email or password".</td>
+          <td><span class="badge badge-pass">PASS (401)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-08</strong></td>
+          <td><span class="code-span">GET /me</span></td>
+          <td><span class="badge badge-student">Auth</span></td>
+          <td>Get profile with valid Bearer token vs omitted token</td>
+          <td><strong>200 OK</strong> with valid token; <strong>401 Unauthorized</strong> when token omitted.</td>
+          <td><span class="badge badge-pass">PASS (200/401)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>QuizVerse Role-Based Platform • Test Specification</span>
+    <span>Page 2 of 3</span>
+  </div>
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <div class="page-break"></div>
+
+  <!-- Suite F: Quiz API Endpoints -->
+  <div class="avoid-break" style="margin-top: 4px;">
+    <h3>Suite F: Quiz Management & Submissions Endpoints (<span class="code-span">/api/quizzes</span>)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 14%;">Endpoint</th>
+          <th style="width: 9%;">Role</th>
+          <th style="width: 25%;">Scenario Description</th>
+          <th style="width: 34%;">Expected Status & Response Contract</th>
+          <th style="width: 10%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BB-09</strong></td>
+          <td><span class="code-span">POST /quizzes</span></td>
+          <td><span class="badge badge-admin">Admin</span></td>
+          <td>Admin creates a new quiz</td>
+          <td><strong>201 Created</strong>: Persists quiz; returns new quiz object with generated <span class="code-span">_id</span>.</td>
+          <td><span class="badge badge-pass">PASS (201)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-10</strong></td>
+          <td><span class="code-span">POST /quizzes</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Student attempts to create quiz (RBAC restriction)</td>
+          <td><strong>403 Forbidden</strong>: Rejects unauthorized student role.</td>
+          <td><span class="badge badge-pass">PASS (403)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-11</strong></td>
+          <td><span class="code-span">POST /quizzes</span></td>
+          <td><span class="badge badge-public">Public</span></td>
+          <td>Unauthenticated request to create quiz</td>
+          <td><strong>401 Unauthorized</strong>: Rejects request with token missing message.</td>
+          <td><span class="badge badge-pass">PASS (401)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-12</strong></td>
+          <td><span class="code-span">GET /quizzes</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Fetch published quizzes list</td>
+          <td><strong>200 OK</strong>: Returns array of published quizzes with summary details.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-13</strong></td>
+          <td><span class="code-span">GET /quizzes/:id</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Fetch quiz for taking (Answer Leak Protection)</td>
+          <td><strong>200 OK</strong>: <span class="code-span">correctOptionIndex</span> is strictly stripped from questions.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-14</strong></td>
+          <td><span class="code-span">POST /:id/submit</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Student submits quiz answers</td>
+          <td><strong>200 OK</strong>: Returns computed total score, max score, percentage & pass/fail.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-15</strong></td>
+          <td><span class="code-span">GET /submissions/my</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Fetch personal submission history</td>
+          <td><strong>200 OK</strong>: Returns student's historical attempts and scores.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-16</strong></td>
+          <td><span class="code-span">DELETE /quizzes/:id</span></td>
+          <td><span class="badge badge-student">Student</span></td>
+          <td>Student attempts to delete quiz</td>
+          <td><strong>403 Forbidden</strong>: Rejects student deletion request.</td>
+          <td><span class="badge badge-pass">PASS (403)</span></td>
+        </tr>
+        <tr>
+          <td><strong>BB-17</strong></td>
+          <td><span class="code-span">DELETE /quizzes/:id</span></td>
+          <td><span class="badge badge-admin">Admin</span></td>
+          <td>Admin deletes quiz and associated attempts</td>
+          <td><strong>200 OK</strong>: Deletes quiz; subsequent lookup returns <strong>404 Not Found</strong>.</td>
+          <td><span class="badge badge-pass">PASS (200)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4: EXECUTION SUMMARY -->
+  <div class="avoid-break" style="margin-top: 10px;">
+    <h2>4. Test Execution & Verification Commands</h2>
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Scope</th>
+          <th style="width: 45%;">Execution Command</th>
+          <th style="width: 15%;">Test Count</th>
+          <th style="width: 15%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>All Tests (Full Suite)</strong></td>
+          <td><span class="code-span">npm test</span> (from project root or backend)</td>
+          <td>34 Tests</td>
+          <td><span class="badge badge-pass">34 PASSED</span></td>
+        </tr>
+        <tr>
+          <td><strong>Whitebox Tests Only</strong></td>
+          <td><span class="code-span">npm run test:whitebox</span></td>
+          <td>17 Tests</td>
+          <td><span class="badge badge-pass">17 PASSED</span></td>
+        </tr>
+        <tr>
+          <td><strong>Blackbox Tests Only</strong></td>
+          <td><span class="code-span">npm run test:blackbox</span></td>
+          <td>17 Tests</td>
+          <td><span class="badge badge-pass">17 PASSED</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>QuizVerse Role-Based Platform • Test Specification</span>
+    <span>Page 3 of 3</span>
+  </div>
+
+</body>
+</html>

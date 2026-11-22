@@ -1,0 +1,63 @@
+# Dependencies (covers root, client, and server)
+node_modules/
+.pnp
+.pnp.js
+
+# Environment variables (keeps secrets & DB URIs safe)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build & Production outputs (Create React App, Vite, TypeScript, etc.)
+build/
+dist/
+out/
+.next/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Local MongoDB / Database files (if stored locally)
+*.sock
+*.lock
+*.pid
+*.seed
+data/db/
+
+# Runtime & Cache files
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
+*.tgz
+.cache/
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# Optional: Local user uploads (uncomment if storing media locally instead of S3/Cloudinary)
+# uploads/
+
